@@ -1,11 +1,11 @@
-FROM keymetrics/pm2-docker-alpine
+FROM keymetrics/pm2
 
 MAINTAINER Dieter Wimberger "dieter@wimpi.net"
 
 WORKDIR /
 
 # Install deps
-RUN apk add --no-cache build-base gcc binutils binutils-doc gcc-doc g++ make autoconf automake libtool git imagemagick imagemagick-dev lcms2 fontconfig freetype zlib
+RUN apk add --no-cache build-base gcc binutils binutils-doc gcc-doc g++ make autoconf automake libtool git imagemagick imagemagick-dev lcms2 fontconfig freetype zlib bash
 
 # Fix lib references
 RUN ln -s /usr/lib/libfreetype.so.6 /usr/lib/libfreetype.so
@@ -14,8 +14,8 @@ RUN ln -s /usr/lib/libfontconfig.so.1 /usr/lib/libfontconfig.so
 RUN ln -s /lib/libz.so.1 /lib/libz.so
 
 # Clone reps
-RUN git clone git://libdmtx.git.sourceforge.net/gitroot/libdmtx/libdmtx
-RUN git clone git://libdmtx.git.sourceforge.net/gitroot/libdmtx/dmtx-utils
+RUN git clone https://github.com/dmtx/libdmtx.git
+RUN git clone https://github.com/dmtx/dmtx-utils.git
 
 # Build libdmtx
 WORKDIR /libdmtx
